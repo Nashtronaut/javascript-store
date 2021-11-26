@@ -18,12 +18,13 @@
             const productElements = renderProducts(data);
             const products = addProductActions(productElements);
             const main = document.createElement('main');
+            main.classList.add('flex-container')
             
             products.forEach(product=>{
                 main.append(product)
             })
             
-            document.querySelector('.flex-container').appendChild(main)
+            document.querySelector('.store-front').appendChild(main)
         })
         .catch(error => console.log(error));
 
@@ -44,7 +45,13 @@
     }
     
     function onRequestForInfo(e){
-        console.log(e.currentTarget.dataset.key);
+        const product = store.find(product=>{
+            const key = Number(e.currentTarget.dataset.key);
+            
+            if (product.id === key){
+                return product;
+            }
+        })
     }
     
     function addProductActions(products){
